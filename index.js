@@ -1,36 +1,20 @@
 'use strict';
 
-const express = require('express');
-const app = express();
-const mongoose = require('mongoose');
+let express = require('express');
+let app = express();
+require('./cors')(app);
+let mongoose = require('mongoose');
 mongoose.Promise = Promise;
-const ContactInfo = require('./contact-info');
+let bodyParser = require('body-parser');
 
-const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 let mongoDb = process.env.DB || 'localhost/test';
 mongoose.connect(`mongodb://${mongoDb}`);
 
-require('./cors')(app);
-
-app.get("/", (req, res) => res.send("ping"));
-
-app.post('/', (req, res) => {
-  let body = req.body;
-  if (!body) res.status(400);
-
-  new ContactInfo(body).save()
-    .then(data => {
-      console.log("Data saved: " + data);
-      res.sendFile('index.html', { root: __dirname + "/public" });
-    })
-    .catch(err => {
-      console.error(err);
-      res.status(500);
-    });
-});
+let routes = require('./routes');
+app.use("/", routes);
 
 let port = process.env.PORT || 3000;
 app.listen(port, function () {
