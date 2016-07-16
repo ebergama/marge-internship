@@ -15,7 +15,9 @@ mongoose.connect(`mongodb://${mongoDb}`);
 
 require('./cors')(app);
 
-app.post('/', function (req, res) {
+app.get("/", (req, res) => res.send("ping"));
+
+app.post('/', (req, res) => {
   let body = req.body;
   if (!body) res.status(400);
 
