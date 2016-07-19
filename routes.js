@@ -13,7 +13,7 @@ router.post('/', (req, res) => {
 	new ContactInfo(body).save()
 		.then(data => {
 			console.log("Data saved: " + data);
-			res.sendFile('index.html', { root: __dirname + "/public" });
+			res.redirect("http://www.medallia.com.ar/internship");
 		})
 		.catch(err => {
 			console.error(err);
