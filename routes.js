@@ -35,4 +35,8 @@ router.get("/list", auth, (req, res) => {
 	})
 });
 
+router.get('/count', (req, res) => {
+	ContactInfo.count({}).then(data => res.json({'count': data}));
+});
+
 module.exports = router;
