@@ -3,6 +3,7 @@
 let express = require('express');
 let router = require('express').Router();
 let ContactInfo = require('./contact-info');
+let _ = require('lodash');
 
 router.get('/', (req, res) => res.send('ping'));
 
@@ -37,6 +38,10 @@ router.get("/list", auth, (req, res) => {
 
 router.get('/count', (req, res) => {
 	ContactInfo.count({}).then(data => res.json({'count': data}));
+});
+
+router.get('/byUniversity', auth, (req, res) => {
+	ContactInfo.find().then(data => res.json(_.mapValues(_.groupBy(data, 'university'), item => item.length)));
 });
 
 module.exports = router;
