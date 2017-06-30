@@ -8,13 +8,14 @@ let _ = require('lodash');
 router.get('/', (req, res) => res.send('ping'));
 
 router.post('/', (req, res) => {
+console.log(res.headers);
 	let body = req.body;
 	if (!body) res.status(400);
 
 	new ContactInfo(body).save()
 		.then(data => {
 			console.log("Data saved: " + data);
-			res.redirect("http://www.medallia.com.ar/internship/#square-modules");
+			res.status(204);
 		})
 		.catch(err => {
 			console.error(err);
