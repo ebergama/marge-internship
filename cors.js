@@ -2,7 +2,7 @@
 
 let cors = require('cors');
 let options = {
-  origin: "*",
+  origin: "http://www.medallia.com.ar",
   methods: 'POST',
   allowedHeaders: 'Origin,X-Requested-With,Content-Type,Accept'
 };

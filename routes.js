@@ -6,16 +6,15 @@ let ContactInfo = require('./contact-info');
 let _ = require('lodash');
 
 router.get('/', (req, res) => res.send('ping'));
-
+router.options('/', (req, res) => res.status(204));
 router.post('/', (req, res) => {
-console.log(res.headers);
 	let body = req.body;
 	if (!body) res.status(400);
 
 	new ContactInfo(body).save()
 		.then(data => {
 			console.log("Data saved: " + data);
-			res.status(204);
+			res.send('ok');
 		})
 		.catch(err => {
 			console.error(err);
