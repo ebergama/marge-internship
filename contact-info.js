@@ -2,7 +2,7 @@
 
 let mongoose = require('mongoose');
 
-let ContactInfo = mongoose.Schema({
+let ContactInfoNext = mongoose.Schema({
   name: String,
   surname: String,
   email: String,
@@ -12,4 +12,4 @@ let ContactInfo = mongoose.Schema({
   careerTimeLeft: String
 });
 
-module.exports = mongoose.model("ContactInfo", ContactInfo);
+module.exports = mongoose.model("ContactInfoNext", ContactInfoNext);
